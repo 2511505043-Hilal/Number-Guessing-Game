@@ -1,21 +1,21 @@
-🎯 Sayı Tahmin Oyunu
+🎯 Number Guessing Game
 
-Bu proje, C# kullanılarak geliştirilen basit bir konsol tabanlı sayı tahmin oyunudur.
+This project is a simple console-based number guessing game developed using C#.
 
-📌 Özellikler
+📌 Features
 
-- 3 farklı zorluk seviyesi
-  - Kolay (1-50)
-  - Orta (1-100)
-  - Zor (1-1000)
-- Rastgele sayı üretme
-- Kullanıcı giriş doğrulama ("try-catch")
-- Büyük/Küçük ipuçları
-- Yaklaşıldığında ek ipucu verme
-- Deneme sayısını gösterme
-- Oyunun süresini ölçme
-- Her zorluk seviyesi için en iyi süreyi (rekor) tutma
-- Tekrar oynama seçeneği
+- 3 different difficulty levels
+  - Easy (1-50)
+  - Medium (1-100)
+  - Hard (1-1000)
+- Random number generation
+- User input validation ("try-catch")
+- Higher/Lower hints
+- Additional hints when getting close to the number
+- Tracking the number of attempts
+- Measuring game duration
+- Keeping the best time (record) for each difficulty level
+- Replay option
 
 🛠️ Kullanılan Teknolojiler
 
@@ -25,7 +25,7 @@ Bu proje, C# kullanılarak geliştirilen basit bir konsol tabanlı sayı tahmin 
 
 📚 Bu projede kullandığım konular
 
-- Değişkenler
+- Variables
 - "if - else if - else"
 - "switch"
 - "while"
@@ -36,14 +36,14 @@ Bu proje, C# kullanılarak geliştirilen basit bir konsol tabanlı sayı tahmin 
 - "ToLower()"
 - "ToString("F2")"
 
-🚀 Nasıl Çalıştırılır?
+🚀 How to Run ?
 
-1. Projeyi indirin veya klonlayın.
-2. Visual Studio veya Visual Studio Code ile açın.
-3. "Program.cs" dosyasını çalıştırın.
-4. Zorluk seviyesini seçerek oyunu oynayın.
+1. Download or clone the repository.
+2. Open the project with Visual Studio or Visual Studio Code.
+3. Run the Program.cs file.
+4. Select a difficulty level and play the game.
 
-👨‍💻 Geliştirici
+👨‍💻 Developer
 
 Hilal Nur
-Yazılım Mühendisliği Öğrencisi
+Software Engineering Student
