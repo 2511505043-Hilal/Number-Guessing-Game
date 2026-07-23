@@ -1,25 +1,24 @@
 using System;
-namespace SayiTahminOyunu
+namespace NumberGuessingGame
 {
-
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            bool tekrar = true;
+            bool again = true;
 
-            double kolayRekor = double.MaxValue;  // her zorluk için en iyi süre tutulur.
-            double ortaRekor = double.MaxValue;
-            double zorRekor = double.MaxValue;
+            double easyRecord = double.MaxValue;  // her zorluk için en iyi süre tutulur.
+            double mediumRecord = double.MaxValue;
+            double hardRecord = double.MaxValue;
 
-            while (tekrar)   // oyunun devamlılığını sağlar.
+            while (again)   // oyunun devamlılığını sağlar.
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("--- Sayı Tahmin Oyunu ---");
-                Console.WriteLine(" 1 - Kolay (1-50 arası) ");
-                Console.WriteLine(" 2 - Orta (1-100 arası) ");
-                Console.WriteLine(" 3 - Zor (1-1000 arası) ");
+                Console.WriteLine("--- Number Guessing Game ---");
+                Console.WriteLine(" 1 - Easy (1 to 50) ");
+                Console.WriteLine(" 2 - Medium (1 to 100) ");
+                Console.WriteLine(" 3 - Hard (1 to 1000) ");
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("");
                 Console.ResetColor();
@@ -28,198 +27,198 @@ namespace SayiTahminOyunu
 
                 try  // kullanıcıdan zorluk seviyesi alınır.
                 {
-                    Console.Write("Hangi zorluğu seçiyorsunuz sayı ile belirtiniz : ");
+                    Console.Write("Select a difficulty level (enter a number) : ");
                     mod = int.Parse(Console.ReadLine());
                 }
                 catch
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Lütfen bir sayı giriniz!!");
+                    Console.WriteLine("Please enter a number !!");
                     Console.ResetColor();
                     continue;
                 }
 
-                Random rastgele = new Random();
-                int tutulan = 0;
+                Random random = new Random();
+                int numberHeld = 0;
 
                 switch (mod)
                 {  // seçilen zorluk seviyesine göre rastgele sayı oluşturur.
                     case 1:
-                        tutulan = rastgele.Next(1, 51);
+                        numberHeld = random.Next(1, 51);
                         break;
 
                     case 2:
-                        tutulan = rastgele.Next(1, 101);
+                        numberHeld = random.Next(1, 101);
                         break;
 
                     case 3:
-                        tutulan = rastgele.Next(1, 1001);
+                        numberHeld = random.Next(1, 1001);
                         break;
                     default:
-                        Console.WriteLine("Geçersiz seçim lütfen 1 , 2 veya 3 giriniz !!!");
+                        Console.WriteLine("Invalid choice, please enter 1, 2, or 3 !!!");
                         continue;
                 }
                 // süre ölçümü oyun başladığı anda başlatılır.
-                DateTime simdi = DateTime.Now;
-                int tahmin;
+                DateTime startTime = DateTime.Now;
+                int guess;
 
                 try
                 {
-                    Console.Write("Sayıyı tuttum tahminin nedir : ");
-                    tahmin = int.Parse(Console.ReadLine());
+                    Console.Write("I have picked a number. What is your guess : ");
+                    guess = int.Parse(Console.ReadLine());
                 }
                 catch
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Lütfen geçerli bir sayı giriniz!!");
+                    Console.WriteLine("Please enter a valid number!!");
                     Console.ResetColor();
                     continue;
                 }
 
-                int deneme = 1;
+                int totry = 1;
 
 
-                while (tahmin != tutulan) // tutulan sayı bulunana kadar devam eder.
+                while (guess != numberHeld) // tutulan sayı bulunana kadar devam eder.
                 {
 
-                    if (tahmin > tutulan)
+                    if (guess > numberHeld)
                     {
-                        Console.WriteLine("Tuttuğum sayı daha KÜÇÜK");
+                        Console.WriteLine("My number is SMALLER");
 
-                        int fark = tahmin - tutulan;
+                        int diff = guess - numberHeld;
 
-                        if (fark <= 3)
+                        if (diff <= 3)
                         {
-                            Console.WriteLine("Amaaa bulmak üzeresin çok yaklaştın..");
+                            Console.WriteLine("But you are very close, almost there..");
                         }
 
-                        else if (fark <= 10)
+                        else if (diff <= 10)
                         {
-                            Console.WriteLine("Amaaa çok yaklaştın..");
+                            Console.WriteLine("But you are getting close..");
                         }
 
                     }
-                    else if (tahmin < tutulan)
+                    else if (guess < numberHeld)
                     {
-                        Console.WriteLine("Tuttuğum sayı daha BÜYÜK");
+                        Console.WriteLine("My number is BIGGER");
 
-                        int fark = tutulan - tahmin;
+                        int diff = numberHeld - guess;
 
                         // tahmini hedef sayıya yaklaştığında fazladan ipucu verilir.
-                        if (fark <= 3)
+                        if (diff <= 3)
                         {
-                            Console.WriteLine("Amaaa bulmak üzeresin çok yaklaştın..");
+                            Console.WriteLine("But you are very close, almost there..");
                         }
 
-                        else if (fark <= 10)
+                        else if (diff <= 10)
                         {
-                            Console.WriteLine("Amaaa çok yaklaştın..");
+                            Console.WriteLine("But you are getting close..");
                         }
                     }
                     try
                     {
-                        Console.Write("Yeni tahminin ne : ");
-                        tahmin = int.Parse(Console.ReadLine());
+                        Console.Write("What is your new guess : ");
+                        guess = int.Parse(Console.ReadLine());
                     }
                     catch
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Lütfen geçerli bir sayı giriniz!!");
+                        Console.WriteLine("Please enter a valid number!!");
                         Console.ResetColor();
                         continue;
                     }
 
-                    deneme++;
+                    totry++;
                 }
 
-                if (tahmin == tutulan) // tutulan sayı bulunduğunda sonuçlar gösterilir.
+                if (guess == numberHeld) // tutulan sayı bulunduğunda sonuçlar gösterilir.
                 {
 
-                    Console.WriteLine("Tutulan sayı : " + tutulan);
-                    if (deneme == 1)
+                    Console.WriteLine("The number was : " + numberHeld);
+                    if (totry == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("Ooo doğru tahmin tekte buldun !!!");
+                        Console.WriteLine("Wooooww, correct guess on the first try !!!");
                         Console.ResetColor();
                     }
 
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.WriteLine(deneme + " denemede buldun tebrikler");
+                        Console.WriteLine("You found it in " + totry + " tries, congratulations !");
                         Console.ResetColor();
                     }
 
-                    DateTime bitis = DateTime.Now;
-                    TimeSpan gecensure = bitis - simdi; // sayı bulunana kadarki geçen süre hesaplanır.
+                    DateTime endTime = DateTime.Now;
+                    TimeSpan elapsedTime = endTime - startTime; // sayı bulunana kadarki geçen süre hesaplanır.
 
-                    Console.Write("Geçen süre : "); // geçen süre saat dakika saniye olarak ekrana yazdırılır.
+                    Console.Write("Time elapsed : "); // geçen süre saat dakika saniye olarak ekrana yazdırılır.
 
-                    if (gecensure.Hours > 0)
+                    if (elapsedTime.Hours > 0)
                     {
-                        Console.Write(gecensure.Hours + " saat ");
+                        Console.Write(elapsedTime.Hours + " hours ");
                     }
 
-                    if (gecensure.Minutes > 0)
+                    if (elapsedTime.Minutes > 0)
                     {
-                        Console.Write(gecensure.Minutes + " dakika ");
+                        Console.Write(elapsedTime.Minutes + " minutes ");
                     }
 
-                    Console.WriteLine(gecensure.Seconds + " saniye ");
+                    Console.WriteLine(elapsedTime.Seconds + " seconds ");
 
-                    double sure = gecensure.TotalSeconds;
+                    double time = elapsedTime.TotalSeconds;
 
                     switch (mod)
                     {  // rekoru geçtiysek seçilen mod a göre rekor süresi güncellenir.
                         case 1:
 
-                            if (sure < kolayRekor)
+                            if (time < easyRecord)
                             {
-                                kolayRekor = sure;
-                                Console.WriteLine("🎉 Yeni kolay mod rekoru!");
+                                easyRecord = time;
+                                Console.WriteLine("🎉 New Easy mode record!");
                             }
-                            Console.WriteLine("Kolay mod rekoru : " + kolayRekor.ToString("F2"));
+                            Console.WriteLine("Easy mode record : " + easyRecord.ToString("F2"));
                             break;
 
                         case 2:
 
-                            if (sure < ortaRekor)
+                            if (time < mediumRecord)
                             {
-                                ortaRekor = sure;
-                                Console.WriteLine("🎉 Yeni orta mod rekoru!");
+                                mediumRecord = time;
+                                Console.WriteLine("🎉 New Medium mode record!");
                             }
-                            Console.WriteLine("Orta mod rekoru : " + ortaRekor.ToString("F2"));
+                            Console.WriteLine("Medium mode record : " + mediumRecord.ToString("F2"));
                             break;
 
                         case 3:
 
-                            if (sure < zorRekor)
+                            if (time < hardRecord)
                             {
-                                zorRekor = sure;
-                                Console.WriteLine("🎉 Yeni zor mod rekoru!");
+                                hardRecord = time;
+                                Console.WriteLine("🎉 New Hard mode record!");
                             }
-                            Console.WriteLine("Zor mod rekoru: " + zorRekor.ToString("F2"));
+                            Console.WriteLine("Hard mode record : " + hardRecord.ToString("F2"));
                             break;
                     }
                 }
                 // kullanıcıya tekrar oynamak isteyip istemediği sorulur.
-                Console.Write("Tekrar oynamak ister misin? (evet veya hayır yaz): ");
-                string secim = Console.ReadLine();
+                Console.Write("Do you want to play again ? (type 'yes' or 'no') : ");
+                string choice = Console.ReadLine();
 
-                while ((secim.ToLower() != "hayır") && (secim.ToLower() != "evet"))
+                while ((choice.ToLower() != "no") && (choice.ToLower() != "yes"))
                 {    // kullanıcı sadece evet veya hayır yazabilir.
 
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Lütfen sadece ''evet'' veya ''hayır'' yazınız.");
+                    Console.WriteLine("Lütfen sadece ''yes'' veya ''no'' yazınız.");
                     Console.ResetColor();
 
-                    Console.Write("Tekrar oynamak ister misin? (evet veya hayır yaz): ");
-                    secim = Console.ReadLine();
+                    Console.Write("Do you want to play again ? (type 'yes' or 'no') : ");
+                    choice = Console.ReadLine();
                 }
 
-                if (secim.ToLower() == "hayır")
+                if (choice.ToLower() == "no")
                 {
-                    tekrar = false;
+                    again = false;
                 }
             }
         }
